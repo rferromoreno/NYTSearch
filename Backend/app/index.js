@@ -1,5 +1,6 @@
 const express = require('express');
 const ser = require('./services/nyt.api.service');
+const query = require('querystring');
 
 var app = express();
 
@@ -10,9 +11,19 @@ app.get('/', function(req, res) {
 
 app.get('/search/:queryString/:startDate/:endDate', function(req, res) {
   // Llamada al service
-  // Habria que verificar si estan bien los parametros
   // Quizas la logica de la validacion hay que ubicarla en otro lado
-  ser.getNews(req.params.startDate, req.params.endDate, req.params.queryString)
+  // Si la query string es vacia no lo rutea por aca, sino que tira un 404
+
+  //Se crea un arreglo con las distintas partes de la query
+  let queryObj = query.parse(req.params.queryString); 
+  let queryArr = Object.values(queryObj).map(function(value) {
+        return value;
+  });
+
+  //"..." es el operador "spread" que separa un arreglo en elementos simples
+  //Cada opción en la query(en el arreglo) se la pasa a getNews 
+  //como un parámetro adicional
+  ser.getNews(req.params.startDate, req.params.endDate, ...queryArr)
     .then((data) => {
         console.log(data);
         res.send(data);

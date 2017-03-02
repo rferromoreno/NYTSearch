@@ -27,7 +27,6 @@ function setOptions(beginDate, endDate, ...args) {
     });
     options.qs.begin_date = `${beginDate}`;
     options.qs.end_date = `${endDate}`;
-
     return options;
 }
 
