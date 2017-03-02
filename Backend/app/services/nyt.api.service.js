@@ -8,7 +8,12 @@ exports.getNews = getNews;
 //  strings - q, sort, fl (in that order)
 function getNews(beginDate, endDate, ...args) {
     let options = setOptions(beginDate, endDate, args);
-    return request(options);
+    return request(options).then(stripData);
+}
+
+//Resolving promise to strip innecesary meta-data
+function stripData(response) {
+    return response.docs;
 }
 
 //Creates the options object.
@@ -22,7 +27,7 @@ function setOptions(beginDate, endDate, ...args) {
     });
     options.qs.begin_date = `${beginDate}`;
     options.qs.end_date = `${endDate}`;
-    
+
     return options;
 }
 
