@@ -13,7 +13,7 @@ function getNews(beginDate, endDate, ...args) {
 
 //Resolving promise to strip innecesary meta-data
 function stripData(response) {
-    return response.docs;
+    return response.response.docs;
 }
 
 //Creates the options object.
