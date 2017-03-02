@@ -1,5 +1,6 @@
 const express = require('express');
 const ser = require('./services/nyt.api.service');
+const query = require('querystring');
 
 var app = express();
 
@@ -20,7 +21,10 @@ router.get('/', function(req, res) {
 });
 
 router.get('/search/:queryString/:startDate/:endDate', function(req, res) {
-    ser.getNews(req.params.startDate, req.params.endDate, req.params.queryString)
+   // Si la query string es vacia no lo rutea por aca, sino que tira un 404
+   // Quizas la logica de la validacion hay que ubicarla en otro lado
+
+   ser.getNews(req.params.startDate, req.params.endDate, req.params.queryString)
     .then((data) => {
         console.log(data);
         res.send(data);

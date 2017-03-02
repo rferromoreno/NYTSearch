@@ -4,10 +4,8 @@ exports.getNews = getNews;
 
 //Gets the news.
 //Returns a promise.
-//Optional arguments: 
-//  strings - q, sort, fl (in that order)
-function getNews(beginDate, endDate, ...args) {
-    let options = setOptions(beginDate, endDate, args);
+function getNews(beginDate, endDate, query) {
+    let options = setOptions(beginDate, endDate, query);
     return request(options).then(stripData);
 }
 
@@ -17,14 +15,11 @@ function stripData(response) {
 }
 
 //Creates the options object.
-function setOptions(beginDate, endDate, ...args) {
+function setOptions(beginDate, endDate, query) {
     let options = optionTmp;
 
     //Overriding options themplate.
-    args.forEach(function(value, index) {
-        let qsOption = qsOptionsEnum[index]; 
-        options.qs[`${qsOption}`] = value[0];
-    });
+    options.qs.q = `${query}`;
     options.qs.begin_date = `${beginDate}`;
     options.qs.end_date = `${endDate}`;
     return options;
