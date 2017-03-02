@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 
+/*Esta clase se ocupa de manejar el componente ¨Botonera ¨ que será el encargado de manejar los inputs
+para las fechas y la query */
+
+
+
 
 class Botonera extends Component{
 
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    //this.handleSubmit = this.props.onSubmit;
   }
 
 
   handleSubmit(event) {
-    alert('Apretastee' );
-    event.preventDefault();
+
+    this.props.onSubmit(event);
+   
   }
 
 
@@ -24,19 +31,19 @@ render()
                     <div className="busqueda">
                         <legend> Buscar:  </legend>
                     
-                        <input type="text" name="qname"/>
+                        <input type="text" name="qname" required/>
                     </div>
 
                     <div className="inicio">
                       <legend> Fecha de inicio: </legend>
                   
-                      <input type="date" name="finicio"/>
+                      <input type="date" name="finicio" required/>
                     </div>
 
                     <div className="inicio">
                       <legend> Fecha final: </legend>
                 
-                      <input type="date" name="ffinal"/>
+                      <input type="date" name="ffinal" required/>
                     </div>
 
                     <div className="boton">
