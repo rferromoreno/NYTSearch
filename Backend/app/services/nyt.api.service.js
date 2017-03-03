@@ -1,17 +1,17 @@
 let request = require('request-promise');
+var errors = require('request-promise/errors');
 
 exports.getNews = getNews;
 
-//Gets the news.
-//Returns a promise.
+/*
+*Gets the news.
+*   Returns a promise of an array of news.
+*/
 function getNews(beginDate, endDate, query) {
     let options = setOptions(beginDate, endDate, query);
-    return request(options).then(stripData);
-}
-
-//Resolving promise to strip innecesary meta-data
-function stripData(response) {
-    return response.response.docs;
+    return request(options)
+            .then(stripData)
+            .catch(handleError);
 }
 
 //Creates the options object.
@@ -23,6 +23,16 @@ function setOptions(beginDate, endDate, query) {
     options.qs.begin_date = `${beginDate}`;
     options.qs.end_date = `${endDate}`;
     return options;
+}
+
+//Resolving promise to strip innecesary meta-data
+function stripData(response) {
+    console.log(`${module.id} - method stripData - response status: ${response.status}`);
+    return response.response.docs;
+}
+
+function handleError(error) {
+    return console.error(`${module.id} - error: ${error}`);
 }
 
 //Options template for request
@@ -37,10 +47,3 @@ const optionTmp = {
     },
     json: true
 };
-
-//Query options enum for API call
-const qsOptionsEnum = [
-    'q',
-    'sort',
-    'fl'
-];
