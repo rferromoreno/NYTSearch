@@ -1,5 +1,7 @@
 const express = require('express');
 const ser = require('./services/nyt.api.service');
+const newsMiddleWare = require('./middlewares/news.middleware');
+const checkUrlMiddleware = require('./middlewares/urlchecker.middleware');
 
 var app = express();
 
@@ -20,21 +22,9 @@ router.get('/', function(req, res) {
 });
 
 // Route for the Search API. Eg. /search/Argentina/20160101/20170101
-router.get('/search/:queryString?/:startDate?/:endDate?', function(req, res) {
-    // Revisar si la logica de la validación conviene ponerla acá o en otro lado.
-
-   ser.getNews(req.params.startDate, req.params.endDate, req.params.queryString)
-    .then((data) => {
-        res.json(data);
-    }, (error)=>{
-        // Si falta alguno de los parametros va a entrar por acá. 
-        // Manejar el errror.
-
-        console.log(error);
-        res.send('Error');
-    });
-
-});
+router.get('/api/search/:queryString?/:startDate?/:endDate?', 
+    newsMiddleWare,
+    checkUrlMiddleware);
 
 /*  Route to manage any other type of error.
     We will temporally manage this as a 404 error, no matter 
