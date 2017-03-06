@@ -5,7 +5,6 @@ module.exports = getNews;
 
 function getNews(request, response, next) {
     // Revisar si la logica de la validación conviene ponerla acá o en otro lado.
-
    nytApiService.getNews(request.params.startDate, 
                         request.params.endDate, 
                         request.params.queryString)
