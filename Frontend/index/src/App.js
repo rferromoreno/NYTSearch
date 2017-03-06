@@ -4,6 +4,7 @@ import './App.css';
 import Botonera from './Botonera';
 import Displayer from './Displayer';
 
+
 /*
 Esta clase es el centro de verdad de la aplicación. A partir de ella se obtienen los valores ingresados por el
 usuario en la ¨Botonera¨ y se encarga de obtener la información asociada a esa consulta y actualizar el ¨Displayer¨ 
@@ -29,10 +30,8 @@ para mostrar al usuario la información.
               snippet: "y esto?",
               url: "www.hexacta.com",
               isAvailable: "true"  
-
            }
-
-           ];
+ ];
 
 class App extends Component {
 
@@ -62,8 +61,20 @@ Actualiza el estado de la clase App con los valores ingresados por el usuario*/
       }); 
       
       //aca deberíamos solicitar la info al server 
-      //por ahora tenemos el facke listadoNoticias 
-
+      //por ahora tenemos el fake listadoNoticias 
+      var urlGet = `http://localhost:3001/api/search/${event.target.qname.value}/20160101/20170101`;
+      
+      //var urlGet = 'http://localhost:3001/api/search/argentina/20160101/20170101';
+      
+      fetch(urlGet)
+        .then(function(response) {
+          return response.json();
+        }).then(function(json) {
+          listadoNoticias = [];
+          listadoNoticias = json;
+        }).catch(function(ex) {
+          console.log('parsing failed', ex)
+        });
 
 /*Ahora debemos renderizar el DOM 
 */ 
@@ -71,8 +82,6 @@ Actualiza el estado de la clase App con los valores ingresados por el usuario*/
   <App />,
   document.getElementById('root')
 );
-
-
 
 
             event.preventDefault();
