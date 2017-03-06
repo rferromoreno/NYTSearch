@@ -11,11 +11,11 @@ render()
             const isAvailable = this.props.isAvailable;
              let td = null;
             if(isAvailable) 
-            {td= <td>{this.props.url}<spam> Disponible </spam> </td> 
+            {td= <td> <a href={this.props.url}>{this.props.url}</a><spam className="disponible"> Disponible </spam> </td> 
 
              }
              else
-                {td= <td>{this.props.url}<spam> No disponible </spam> </td> 
+                {td= <td>{this.props.url}<spam className="noDisponible"> No disponible </spam> </td> 
 
                 }
 

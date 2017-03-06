@@ -1,6 +1,21 @@
 .App {
   text-align: center;
 }
+.noDisponible{
+ color: red;
+
+}
+
+.disponible{
+ color: green;
+
+}
+.sinResultados{
+text-align: center;
+
+}
+
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -21,4 +36,18 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
 }
