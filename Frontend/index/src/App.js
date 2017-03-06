@@ -4,6 +4,7 @@ import './App.css';
 import Botonera from './Botonera';
 import Displayer from './Displayer';
 
+var dateFormat = require('dateformat');
 
 /*
 Esta clase es el centro de verdad de la aplicación. A partir de ella se obtienen los valores ingresados por el
@@ -49,22 +50,22 @@ constructor(props)
 Actualiza el estado de la clase App con los valores ingresados por el usuario*/
 
   handleSubmit(event) {
-        console.log(event.target.qname.value);
-        console.log(event.target.finicio.value);
-        console.log(event.target.ffinal.value);
 
-          //actualiza el estado interno
+        let termino = event.target.qname.value;
+        let fini = dateFormat(event.target.finicio.value, 'yyyymmdd');
+        let ffin = dateFormat(event.target.ffinal.value, 'yyyymmdd');
+
+      //actualiza el estado interno
         this.setState({query: event.target.qname.value,
                             fechaIn:event.target.finicio.value,
                           fechaFin:event.target.ffinal.value}, () => {
             console.log(this.state);
       }); 
-      
-      //aca deberíamos solicitar la info al server 
-      //por ahora tenemos el fake listadoNoticias 
-      var urlGet = `http://localhost:3001/api/search/${event.target.qname.value}/20160101/20170101`;
-      
-      //var urlGet = 'http://localhost:3001/api/search/argentina/20160101/20170101';
+
+      // solicitamos la informacion al service (nuestro)      
+      let urlGet = `http://localhost:3001/api/search/${termino}/${fini}/${ffin}`;
+
+      console.log(urlGet);
       
       fetch(urlGet)
         .then(function(response) {
@@ -72,22 +73,20 @@ Actualiza el estado de la clase App con los valores ingresados por el usuario*/
         }).then(function(json) {
           listadoNoticias = [];
           listadoNoticias = json;
-          
-                    /*Ahora debemos renderizar el DOM 
-                    */ 
-                      ReactDOM.render(
-                      <App />,
-                      document.getElementById('root')
-                    );
+
+          /*Ahora debemos renderizar el DOM 
+          */ 
+            ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+          );
 
 
         }).catch(function(ex) {
           console.log('parsing failed', ex)
         });
 
-
-
-            event.preventDefault();
+        event.preventDefault();
   }
 
 
