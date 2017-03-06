@@ -24,9 +24,28 @@ function checkUrlMiddleware(request, response) {
     Promise.all(promiseArray)
         .then((arrayResponse) => {         
             console.log(`${module.id} - Promise.all`);
+           //foreach para generar un json acorde a lo que consume react
+
+           var newsFormatedArray= [];
+
+            data.forEach((noticia) => {
+                    let aux={};
+                    aux['url']=noticia.web_url;
+                     aux['snippet']=noticia.snippet;
+                      aux['title']=noticia.headline.main;
+                       aux['isAvailable']=noticia.isAvailable;
+
+                   
+                
+                newsFormatedArray.push(aux); 
+               
+                 });
+
 
             //Ya modifique 'data' en el forEach
-            return response.json(data);
+            //return response.json(data);
+
+            return response.json(newsFormatedArray);
         })
         .catch(handleError);
 }
