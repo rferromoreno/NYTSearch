@@ -1,57 +1,36 @@
 const request = require('request-promise');
+const querystring = require('querystring');
 const urlCheckerService = require('../services/urlchecker.service.js');
 
 module.exports = checkUrlMiddleware;
 
 function checkUrlMiddleware(request, response) {
-    //TODO for del array con un request 
-    //a cada url (vas a tener que usar Promises.All para
-    //resolver todas las promesas de los request a la vez)
+    var data = response.newsArray;
+    var promiseArray= [];
 
-    /*   THEMPLATE DE REQUEST.PARAMS.NEWSaRRAY
-    
-    
-    [
-  {
-    "web_url": "http://www.nytimes.com/2016/12/31/world/asia/indonesia-donald-trump-resort.html",
-    "snippet": "President-elect Donald J. Trump has made deals involving two resorts in Indonesia and forged relationships with powerful political figures there....",
-    "headline": {
-      "main": "Trump’s Indonesia Projects, Still Moving Ahead, Create Potential Conflicts",
-      "print_headline": "Despite Conflict Risk, Trump Projects Push On"
-    },
-    "pub_date": "2016-12-31T16:09:59+0000"
-  },
-  
-  
-   */
- 
-var data=request.res.newsArray;
- var promiseArray= new Array();
-    data.forEach((noticia)=>{
-        var url=noticia.web_url;
-        var aux=urlCheckerService.checkUrl(url);
-       promiseArray.push(aux);
-      }
-      
-       );
- 
-Promise.all(promiseArray).then((response)=>{
-  //noticia.isAvailable=response;   
-        console.log("then ejecutado");})
-        
-        .catch(handleError)
-   
- 
+    //Aplico el servicio a cada noticia
+    data.forEach((noticia) => {
+        let promiseAv = urlCheckerService.checkUrl(noticia.web_url);
 
+        promiseAv.then((isAvailable) => {
+            noticia.isAvailable = isAvailable;
+            return noticia;         
+        }).catch(handleError);
 
+        promiseArray.push(promiseAv);
+    });
 
- response.json(response.newsArray);
+    //Resulevo todas las promesas a la vez
+    Promise.all(promiseArray)
+        .then((arrayResponse) => {         
+            console.log(`${module.id} - Promise.all`);
+
+            //Ya modifique 'data' en el forEach
+            return response.json(data);
+        })
+        .catch(handleError);
 }
 
-
-
-
-function handleError(error){
-console.log(error);
-
+function handleError(error) {
+    console.log(`${module.id} - ${error}`);
 }

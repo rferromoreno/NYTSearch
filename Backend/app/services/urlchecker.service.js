@@ -11,7 +11,11 @@ function checkUrl(url) {
         method : 'HEAD',
         uri : url,
         simple : false,
-        resolveWithFullResponse : true
+        resolveWithFullResponse : true,
+        jar: true,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
     };
 
     return request(options)
@@ -28,6 +32,6 @@ function process(response) {
 }
 
 function handleError(error) {
-    return console.error(`${module.id} - error: ${error.message}`);
+    return console.error(`${module.id} - ${error.message}`);
 }
 
