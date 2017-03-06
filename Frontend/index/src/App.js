@@ -72,16 +72,19 @@ Actualiza el estado de la clase App con los valores ingresados por el usuario*/
         }).then(function(json) {
           listadoNoticias = [];
           listadoNoticias = json;
+          
+                    /*Ahora debemos renderizar el DOM 
+                    */ 
+                      ReactDOM.render(
+                      <App />,
+                      document.getElementById('root')
+                    );
+
+
         }).catch(function(ex) {
           console.log('parsing failed', ex)
         });
 
-/*Ahora debemos renderizar el DOM 
-*/ 
-  ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
 
 
             event.preventDefault();
