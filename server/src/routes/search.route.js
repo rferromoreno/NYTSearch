@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-const newsMiddleWare = require('../middleware/news.middleware');
-const checkUrlMiddleware = require('../middleware/urlchecker.middleware');
+import newsMiddleWare from '../middleware/news.middleware';
+import checkUrlMiddleware from '../middleware/urlchecker.middleware';
 
 export default ({ config }) => {
   const api = Router();
