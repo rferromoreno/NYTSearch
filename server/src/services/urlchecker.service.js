@@ -1,4 +1,6 @@
 import request from 'request-promise';
+import logger from "../logger";
+
 
 exports.checkUrl = checkUrl;
 
@@ -27,11 +29,13 @@ function process(response) {
     let isAlive = response.statusCode >= 200 &&
                     response.statusCode <= 299;
 
-    console.log(`${module.id} - method process - returns: ${isAlive}`);
+    logger.log('info',`${module.id} - method process - returns: ${isAlive}`);
+    //console.log(`${module.id} - method process - returns: ${isAlive}`);
     return isAlive;
 }
 
 function handleError(error) {
-    return console.error(`${module.id} - ${error.message}`);
+    return logger.log('error',`${module.id} - ${error.message}`);
+    //return console.error(`${module.id} - ${error.message}`);
 }
 

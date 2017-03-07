@@ -1,5 +1,6 @@
 import request from 'request-promise';
 import urlCheckerService from '../services/urlchecker.service.js';
+import logger from "../logger"
 
 module.exports = checkUrlMiddleware;
 
@@ -22,7 +23,8 @@ function checkUrlMiddleware(request, response) {
     //Resulevo todas las promesas a la vez
     Promise.all(promiseArray)
         .then((arrayResponse) => {         
-            console.log(`${module.id} - Promise.all`);
+            logger.log('info',`${module.id} - Promise.all`);
+            //console.log(`${module.id} - Promise.all`);
            //foreach para generar un json acorde a lo que consume react
 
            var newsFormatedArray= [];
@@ -44,5 +46,6 @@ function checkUrlMiddleware(request, response) {
 }
 
 function handleError(error) {
-    console.log(`${module.id} - ${error}`);
+    //console.log(`${module.id} - ${error}`);
+    logger.log('error',`${module.id} - ${error}`);
 }

@@ -6,6 +6,7 @@ import middleware from "./middleware";
 import routes from "./routes";
 import config from "./config.json";
 import services from "./services";
+import logger from "./logger"
 
 async function start() {
   let app = express();

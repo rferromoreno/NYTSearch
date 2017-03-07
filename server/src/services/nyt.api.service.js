@@ -1,6 +1,7 @@
 import request from 'request-promise';
 import errors from 'request-promise/errors';
 import config from "../config.json";
+import logger from "../logger";
 
 exports.getNews = getNews;
 
@@ -28,12 +29,14 @@ function setOptions(beginDate, endDate, query) {
 
 //Resolving promise to strip innecesary meta-data
 function stripData(response) {
-    console.log(`${module.id} - method stripData - response status: ${response.status}`);
+    //console.log(`${module.id} - method stripData - response status: ${response.status}`);
+    logger.log('info',`${module.id} - method stripData - response status: ${response.status}`);
     return response.response.docs;
 }
 
 function handleError(error) {
-    return console.error(`${module.id} - error: ${error}`);
+    return logger.log('error',`${module.id} - error: ${error}`)
+    // return console.error(`${module.id} - error: ${error}`);
 }
 
 //Options template for request

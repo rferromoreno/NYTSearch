@@ -1,5 +1,6 @@
 import request from 'request-promise';
 import nytApiService from '../services/nyt.api.service';
+import logger from "../logger";
 
 module.exports = getNews;
 
@@ -14,8 +15,9 @@ function getNews(request, response, next) {
     })
     .catch((error)=> {
         // Si falta alguno de los parametros va a entrar por acá. 
-        // Manejar el errror.
-        console.error(error);
+        logger.log('error',`${module.id} - ${error}`);
+        //console.error(error);
+         // Manejar el errror de mejor manera
         res.send('Error');
     });
 }
