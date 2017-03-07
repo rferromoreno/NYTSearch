@@ -1,45 +1,47 @@
 import React, { Component } from 'react';
 import Item from './Item';
 
-class Displayer extends Component{
+/*
+* Esta clase se ocupa de manejar el componente ¨Displayer¨ que será el encargado de mostrar las noticias
+* que devuele la consulta a nuestra API
+*/
 
+export default 
+  class Displayer extends Component {
+    render() {
+        let rows = [];
+        let aux = 0;
 
-render()
-        {
-           var rows = [];
-           var aux=0;
-           this.props.listadoNoticias.forEach((noticia) => {
-                rows.push(<Item url={noticia.url} title={noticia.title} isAvailable={noticia.isAvailable} snippet={noticia.snippet}  key={aux}></Item>)
-                aux++; });
+        //Creo una fila (Item) por noticia
+        this.props.listadoNoticias.forEach((noticia) => {
+            rows.push(
+                <Item noticia={ noticia } key={ aux } />
+            );
+            aux++; 
+        });                 
 
-            let body=null;                              
-
-            if (rows.length===0){
-                body=  <div className="sinResultados">
-                        No se han encontrado resultados... </div>}
-
-                        else {
-                            body=  <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Título</th>
-                                            <th>Snippet</th> 
-                                            <th>Url</th>
-                                        </tr>
-                                    </thead> <tbody>
-                            {rows} </tbody>
-
-                             </table>}
-          return (
-       
-
-        <div>
-       {body}
-           </div>
-       
-          );
-
+        if (rows.length === 0) {
+            return ( 
+                <div className="sinResultados">
+                    No se han encontrado resultados... 
+                </div>
+            );
         }
-
+        else {
+            return (  
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Snippet</th> 
+                            <th>Url</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        { rows } 
+                    </tbody>
+                </table>
+            );
+        }
+    }
 }
-export default Displayer;
