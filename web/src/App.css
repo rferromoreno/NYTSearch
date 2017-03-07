@@ -1,18 +1,17 @@
 .App {
   text-align: center;
 }
-.noDisponible{
- color: red;
 
+.noDisponible {
+  color: red;
 }
 
-.disponible{
- color: green;
-
+.disponible {
+  color: green;
 }
-.sinResultados{
-text-align: center;
 
+.sinResultados {
+  text-align: center;
 }
 
 .App-logo {
@@ -37,15 +36,15 @@ text-align: center;
 }
 
 table, td, th {    
-    border: 1px solid #ddd;
-    text-align: left;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 th, td {
-    padding: 15px;
+  padding: 15px;
 }
