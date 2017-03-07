@@ -1,5 +1,5 @@
-const request = require('request-promise');
-const urlCheckerService = require('../services/urlchecker.service.js');
+import request from 'request-promise';
+import urlCheckerService from '../services/urlchecker.service.js';
 
 module.exports = checkUrlMiddleware;
 

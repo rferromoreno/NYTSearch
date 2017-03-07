@@ -1,5 +1,5 @@
-const request = require('request-promise');
-const nytApiService = require('../services/nyt.api.service');
+import request from 'request-promise';
+import nytApiService from '../services/nyt.api.service';
 
 module.exports = getNews;
 

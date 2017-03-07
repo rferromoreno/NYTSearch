@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import Botonera from './Botonera';
 import Displayer from './Displayer';
 import "./App.css";
-var dateFormat = require('dateformat');
+import dateFormat from 'dateformat';
 
 class App extends Component {
 

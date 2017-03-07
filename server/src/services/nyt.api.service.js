@@ -1,6 +1,5 @@
-let request = require('request-promise');
-var errors = require('request-promise/errors');
-
+import request from 'request-promise';
+import errors from 'request-promise/errors';
 import config from "../config.json";
 
 exports.getNews = getNews;
