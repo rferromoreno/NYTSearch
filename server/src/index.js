@@ -31,6 +31,15 @@ async function start() {
   // api router
   app.use("/api", routes({ config }));
 
+  // TODO: Devolver mensaje de error (404/500/personalizado) para que 
+  // la parte web pueda mostrar un mensaje amigable
+  // Entra por aca si no entró por alguna de las otras rutas 
+  // (en otras palabras, puso cualquier cosa)
+  app.use(function(req, res, next){
+      res.status(404).send('Error');
+   });
+
+
   app.server.listen(process.env.PORT || config.port);
   console.log(`Started on port ${app.server.address().port}`);
 }

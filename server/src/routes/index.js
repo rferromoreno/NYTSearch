@@ -10,6 +10,6 @@ export default ({ config, db }) => {
   api.get("/", (req, res) => {
     res.json({ version });
   });
-
+  
   return api;
 };
