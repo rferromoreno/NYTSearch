@@ -1,5 +1,4 @@
 const request = require('request-promise');
-const querystring = require('querystring');
 const urlCheckerService = require('../services/urlchecker.service.js');
 
 module.exports = checkUrlMiddleware;
@@ -31,19 +30,13 @@ function checkUrlMiddleware(request, response) {
             data.forEach((noticia) => {
                     let aux={};
                     aux['url']=noticia.web_url;
-                     aux['snippet']=noticia.snippet;
-                      aux['title']=noticia.headline.main;
-                       aux['isAvailable']=noticia.isAvailable;
+                    aux['snippet']=noticia.snippet;
+                    aux['title']=noticia.headline.main;
+                    aux['isAvailable']=noticia.isAvailable;
 
-                   
-                
                 newsFormatedArray.push(aux); 
                
                  });
-
-
-            //Ya modifique 'data' en el forEach
-            //return response.json(data);
 
             return response.json(newsFormatedArray);
         })

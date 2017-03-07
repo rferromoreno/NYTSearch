@@ -3,15 +3,11 @@ import React, { Component } from 'react';
 /*Esta clase se ocupa de manejar el componente ¨Botonera ¨ que será el encargado de manejar los inputs
 para las fechas y la query */
 
-
-
-
 class Botonera extends Component{
 
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    //this.handleSubmit = this.props.onSubmit;
   }
 
 

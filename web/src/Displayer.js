@@ -3,9 +3,6 @@ import Item from './Item';
 
 class Displayer extends Component{
 
-    
-    
-
 
 render()
         {

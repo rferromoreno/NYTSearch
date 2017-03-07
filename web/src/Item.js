@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 
 class Item extends Component{
 
-    
-    
 render()
         {
-
             const isAvailable = this.props.isAvailable;
              let td = null;
             if(isAvailable) 

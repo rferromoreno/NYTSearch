@@ -1,6 +1,8 @@
 let request = require('request-promise');
 var errors = require('request-promise/errors');
 
+import config from "../config.json";
+
 exports.getNews = getNews;
 
 /*
@@ -38,9 +40,9 @@ function handleError(error) {
 //Options template for request
 const optionTmp = {
     method: 'GET',
-    uri: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
+    uri: config.apiurl,
     qs: {
-        'api-key': "63fdd7cc408c4759acc366e4350fb2b0",
+        'api-key': config.apikey,
         'sort': "newest",
         'fl': "web_url,snippet,headline,pub_date"
     },
