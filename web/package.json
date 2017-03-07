@@ -5,6 +5,7 @@
   "dependencies": {
     "dateformat": "^2.0.0",
     "react": "15.4.2",
+    "react-datepicker": "^0.41.1",
     "react-dom": "15.4.2"
   },
   "devDependencies": {
