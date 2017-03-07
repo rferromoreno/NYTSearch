@@ -19,25 +19,10 @@ render()
                         No se han encontrado resultados... </div>}
 
                         else {
-                            body=  <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Título</th>
-                                            <th>Snippet</th> 
-                                            <th>Url</th>
-                                        </tr>
-                                    </thead> <tbody>
-                            {rows} </tbody>
-
-                             </table>}
-          return (
-       
-
-        <div>
-       {body}
-           </div>
-       
-          );
+                            body=<table><thead><tr><th>Título</th><th>Snippet</th><th>Url</th></tr></thead><tbody>{rows}</tbody></table>}
+         
+         
+          return (<div>{body}</div>);
 
         }
 
