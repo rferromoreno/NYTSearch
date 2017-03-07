@@ -2,7 +2,7 @@
 ## Getting Started
 Clone the repository and remove the .git folder:  
 ```
-$ git clone https://github.com/hexacta/react-express-starter-kit my-app
+$ git clone https://github.com/rferromoreno/NYTSearch.git my-app
 $ cd my-app
 $ rm -rf .git
 $ npm install
