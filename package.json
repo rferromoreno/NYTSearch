@@ -12,9 +12,5 @@
   },
   "devDependencies": {
     "npm-run-all": "^4.0.2"
-  },
-  "dependencies": {
-    "request": "^2.80.0",
-    "request-promise": "^4.1.1"
   }
 }
