@@ -10,14 +10,10 @@ class App extends Component {
 constructor(props)
 {
         super(props);
-        this.state = { query: "",
-                       fechaIn:"",
-                       fechaFin:"",
+        this.state = { alreadySearched: false,
                        listadoNoticias: [] } ;
         this.handleSubmit = this.handleSubmit.bind(this);
 }
-
-  //state = { listadoNoticias: null };
 
   handleSubmit = async e => {
     e.preventDefault();
@@ -31,7 +27,8 @@ constructor(props)
     const response = await fetch(urlGet);
     const listadoNoticias = await response.json();
     this.setState({
-      listadoNoticias: listadoNoticias
+      listadoNoticias: listadoNoticias,
+      alreadySearched: true
     });
   };
 
@@ -43,7 +40,7 @@ render() {
               <h2>New York Times searcher</h2>
             </div>
             <Botonera onSubmit={this.handleSubmit}/>
-            <Displayer listadoNoticias={this.state.listadoNoticias}/>
+            <Displayer listadoNoticias={this.state.listadoNoticias} alreadySearched={this.state.alreadySearched} />
           </div>
           );
   }

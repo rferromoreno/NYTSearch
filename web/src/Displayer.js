@@ -3,7 +3,6 @@ import Item from './Item';
 
 class Displayer extends Component{
 
-
 render()
         {
            var rows = [];
@@ -14,13 +13,21 @@ render()
 
             let body=null;                              
 
-            if (rows.length===0){
-                body=  <div className="sinResultados">
-                        No se han encontrado resultados... </div>}
-
-                        else {
-                            body=<table><thead><tr><th>Título</th><th>Snippet</th><th>Url</th></tr></thead><tbody>{rows}</tbody></table>}
-         
+            if (this.props.alreadySearched) 
+            {
+                if (rows.length===0)
+                {
+                    body=<div className="sinResultados">No se han encontrado resultados... </div>
+                }
+                else 
+                {
+                    body=<table><thead><tr><th>Título</th><th>Snippet</th><th>Url</th></tr></thead><tbody>{rows}</tbody></table>
+                }
+            } 
+            else
+            {
+                body="";
+            }   
          
           return (<div>{body}</div>);
 
