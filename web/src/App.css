@@ -18,6 +18,10 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
+.errorPresent{
+ background-color: red ;
+  font-size: large;
+}
 
 .App-header {
   background-color: #222;

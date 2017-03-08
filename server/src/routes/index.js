@@ -8,7 +8,7 @@ export default ({ config, db }) => {
     api.use("/search", search({ config }));
 
     api.use("/*", (req, res, next) => {
-      next(new Error("Not Found"));
+      next(new Error("Error en la consulta"));
     });
     
     return api;

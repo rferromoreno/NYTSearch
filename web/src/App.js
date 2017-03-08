@@ -33,20 +33,37 @@ export default
            
         })
         .then((response)=>{
-            let listadoNoticias=response;
+        let listadoNoticias=response;
+            //check what do we received
+            if(listadoNoticias.statusCode){ //there was an error on the server
+                 console.log('Hubo error: ', listadoNoticias.statusCode);
+                 this.setState({
+                errorPresent: true,
+                errorMessage: listadoNoticias.text
+
+             });
+
+            }
+            else{
+
+            
             console.log('noticias', listadoNoticias);
                 this.setState({
                 listadoNoticias: listadoNoticias,
-                alreadySearched: true
+                alreadySearched: true,
+                 errorPresent: false
 
             });
+
+            }
         })
             .catch((error)=>{
                 console.log('Error en la respuesta del servidor', error);
                 this.setState({
-                errorPresent: true
+                errorPresent: true,
+                errorMessage: 'Error en la comunicación con el servidor, intentelo nuevamente'
 
-            });
+             });
             });
 
     
@@ -62,9 +79,11 @@ export default
 
         if (this.state.errorPresent){
             elementToShow=(
+                
                 <div className="errorPresent">
-                    Ha habido un error... Intente nuevamente
-                </div>);
+                    {this.state.errorMessage}
+                </div>
+                 );
         }
 
         return (
