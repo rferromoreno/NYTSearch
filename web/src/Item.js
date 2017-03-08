@@ -9,33 +9,25 @@ export default
   class Item extends Component {
     render() {
         let noticia = this.props.noticia;
-        const newsIsAvailable = noticia.isAvailable;
+        
+        //Noticia disponible => URL con link
+        let itemUrl = (noticia.isAvailable)? (
+                        <td> 
+                            <a href={ noticia.url }>{ noticia.url }</a> 
+                            <spam className="disponible"> Disponible </spam> 
+                        </td> ) : (
+                        <td>
+                            { noticia.url } 
+                            <spam className="noDisponible"> No disponible </spam> 
+                        </td>
+                      );
 
-        if(newsIsAvailable) 
-        {
-            return (
-                <tr>
-                <td>{noticia.title}</td>
-                <td>{noticia.snippet}</td>
-                <td> 
-                <a href={ noticia.url }>
-                        { noticia.url }
-                </a> 
-                <spam className="disponible"> Disponible </spam> 
-                </td>
-                </tr>
-            );
-        }
-        else {
-            return (
-                <tr>
-                <td>{noticia.title}</td>
-                <td>{noticia.snippet}</td>
-                <td>
-                    { noticia.url }<spam className="noDisponible"> No disponible </spam> 
-                </td>
-                </tr>
-            );
-        }
+        return (
+            <tr>
+                <td> {noticia.title} </td>
+                <td> {noticia.snippet} </td>
+                { itemUrl }
+            </tr>
+       );
     }
 }
