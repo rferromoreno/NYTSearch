@@ -2,46 +2,51 @@ import http from "http";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import middleware from "./middleware";
 import routes from "./routes";
 import config from "./config.json";
-import services from "./services";
-import logger from "./logger"
+import logger from "./logger";
 
 async function start() {
-  let app = express();
-  app.server = http.createServer(app);
+    let app = express();
+    app.server = http.createServer(app);
 
-  // 3rd party middleware
-  app.use(
-    cors({
-      exposedHeaders: config.corsHeaders
-    })
-  );
+    // 3rd party middleware
+    app.use(
+      cors({
+        exposedHeaders: config.corsHeaders
+      })
+    );
 
-  app.use(
-    bodyParser.json({
-      limit: config.bodyLimit
-    })
-  );
+    app.use(
+      bodyParser.json({
+        limit: config.bodyLimit
+      })
+    );
 
-  // internal middleware
-  app.use(middleware({ config }));
+    // api router
+    app.use("/api", routes({ config }));
 
-  // api router
-  app.use("/api", routes({ config }));
+    // Entra por aca si no entró por alguna de las otras rutas 
+    // (en otras palabras, puso cualquier cosa)
+    app.use(function(req, res) {
+        let error = {
+          "statusCode" : "404",
+          "text" : "Not Found"
+        };
+        res.status(404).json(error);
+    });
 
-  // TODO: Devolver mensaje de error (404/500/personalizado) para que 
-  // la parte web pueda mostrar un mensaje amigable
-  // Entra por aca si no entró por alguna de las otras rutas 
-  // (en otras palabras, puso cualquier cosa)
-  app.use(function(req, res, next){
-      res.status(404).send('Error');
-   });
+    //Catch all error handling
+    app.use(function(error, req, res, next) {
+       let errorSend = {
+          "statusCode" : "500",
+          "text" : error.message
+        };
+        res.status(500).json(errorSend);
+    });
 
-
-  app.server.listen(process.env.PORT || config.port);
-  console.log(`Started on port ${app.server.address().port}`);
+    app.server.listen(process.env.PORT || config.port);
+    console.log(`Started on port ${app.server.address().port}`);
 }
 
 start();

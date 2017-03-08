@@ -1,21 +1,21 @@
 import request from 'request-promise';
-import urlCheckerService from '../services/urlchecker.service.js';
-import logger from "../logger"
+import checkUrl from '../services/urlchecker.service.js';
+import logger from "../logger";
 
-module.exports = checkUrlMiddleware;
-
-function checkUrlMiddleware(request, response) {
-    var data = response.newsArray;
-    var promiseArray= [];
+export default
+  function checkUrlMiddleware(request, response, next) {
+    let data = response.newsArray;
+    let promiseArray = [];
 
     //Aplico el servicio a cada noticia
     data.forEach((noticia) => {
-        let promiseAv = urlCheckerService.checkUrl(noticia.web_url);
+        let promiseAv = checkUrl(noticia.web_url);
 
         promiseAv.then((isAvailable) => {
             noticia.isAvailable = isAvailable;
             return noticia;         
-        }).catch(handleError);
+        })
+        .catch(handleError);
 
         promiseArray.push(promiseAv);
     });
@@ -24,21 +24,18 @@ function checkUrlMiddleware(request, response) {
     Promise.all(promiseArray)
         .then((arrayResponse) => {         
             logger.log('info',`${module.id} - Promise.all`);
-            //console.log(`${module.id} - Promise.all`);
-           //foreach para generar un json acorde a lo que consume react
-
-           var newsFormatedArray= [];
+           
+           //Generar un json acorde a lo que consume react
+            let newsFormatedArray= [];
 
             data.forEach((noticia) => {
-                    let aux={};
-                    aux['url']=noticia.web_url;
-                    aux['snippet']=noticia.snippet;
-                    aux['title']=noticia.headline.main;
-                    aux['isAvailable']=noticia.isAvailable;
-
-                newsFormatedArray.push(aux); 
-               
-                 });
+                let aux = {};
+                aux['url'] = noticia.web_url;
+                aux['snippet'] = noticia.snippet;
+                aux['title'] = noticia.headline.main;
+                aux['isAvailable'] = noticia.isAvailable;
+                newsFormatedArray.push(aux);    
+            });
 
             return response.json(newsFormatedArray);
         })
@@ -48,4 +45,5 @@ function checkUrlMiddleware(request, response) {
 function handleError(error) {
     //console.log(`${module.id} - ${error}`);
     logger.log('error',`${module.id} - ${error}`);
+    next(error);
 }

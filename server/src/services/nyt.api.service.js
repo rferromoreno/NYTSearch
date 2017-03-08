@@ -3,13 +3,13 @@ import errors from 'request-promise/errors';
 import config from "../config.json";
 import logger from "../logger";
 
-exports.getNews = getNews;
-
 /*
 *Gets the news.
 *   Returns a promise of an array of news.
 */
-function getNews(beginDate, endDate, query) {
+
+export default
+  function getNews(beginDate, endDate, query) {
     let options = setOptions(beginDate, endDate, query);
     return request(options)
             .then(stripData)
@@ -35,8 +35,8 @@ function stripData(response) {
 }
 
 function handleError(error) {
-    return logger.log('error',`${module.id} - error: ${error}`)
-    // return console.error(`${module.id} - error: ${error}`);
+    logger.log('error',`${module.id} - error: ${error}`);
+    return error; 
 }
 
 //Options template for request
