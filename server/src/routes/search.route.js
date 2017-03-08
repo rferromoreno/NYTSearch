@@ -6,7 +6,7 @@ import checkUrlMiddleware from '../middleware/urlchecker.middleware';
 export default ({ config }) => {
   const api = Router();
 
-  api.get("/:queryString?/:startDate?/:endDate?", 
+  api.get("/:queryString/:startDate/:endDate", 
             newsMiddleWare,
             checkUrlMiddleware);
 

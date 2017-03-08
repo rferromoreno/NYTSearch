@@ -3,13 +3,13 @@ import { Router } from "express";
 import search from "./search.route";
 
 export default ({ config, db }) => {
-  const api = Router();
+    const api = Router();
 
-  api.use("/search", search({ config }));
+    api.use("/search", search({ config }));
 
-  api.get("/", (req, res) => {
-    res.json({ version });
-  });
-  
-  return api;
+    api.use("/*", (req, res, next) => {
+      next(new Error("Not Found"));
+    });
+    
+    return api;
 };
