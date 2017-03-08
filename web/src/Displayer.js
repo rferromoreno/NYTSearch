@@ -9,6 +9,8 @@ import Item from './Item';
 export default 
   class Displayer extends Component {
     render() {
+
+        
         let rows = [];
         let aux = 0;
 
@@ -22,7 +24,10 @@ export default
                 <Item noticia={ noticia } key={ aux } />
             );
             aux++; 
-        });         
+        });   
+
+        
+
 
         if (rows.length === 0) {
             return ( 
