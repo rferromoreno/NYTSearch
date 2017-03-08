@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
 
+/*
+* Esta clase se ocupa de manejar el componente ¨Item¨ que será el encargado de mostrar una noticia
+* que devuele la consulta a nuestra API
+*/
 
-class Item extends Component{
+export default 
+  class Item extends Component {
+    render() {
+        let noticia = this.props.noticia;
+        
+        //Noticia disponible => URL con link : sino URL 
+        let itemUrl = (noticia.isAvailable)? (
+                        <td> 
+                            <a href={ noticia.url }>{ noticia.url }</a> 
+                            <spam className="disponible"> Disponible </spam> 
+                        </td> ) : (
+                        <td>
+                            { noticia.url } 
+                            <spam className="noDisponible"> No disponible </spam> 
+                        </td>
+                      );
 
-render()
-        {
-            const isAvailable = this.props.isAvailable;
-             let td = null;
-            if(isAvailable) 
-            {td= <td> <a href={this.props.url}>{this.props.url}</a><spam className="disponible"> Disponible </spam> </td> 
-
-             }
-             else
-                {td= <td>{this.props.url}<spam className="noDisponible"> No disponible </spam> </td> 
-
-                }
-
-          return (
-              
-         <tr>
-                <td>{this.props.title}</td>
-                <td>{this.props.snippet}</td>
-                {td}
-        </tr>
-          );
-
-        }
-
+        return (
+            <tr>
+                <td> {noticia.title} </td>
+                <td> {noticia.snippet} </td>
+                { itemUrl }
+            </tr>
+       );
+    }
 }
-export default Item;
