@@ -33,7 +33,8 @@ async function start() {
           "statusCode" : "404",
           "text" : "Not Found"
         };
-        res.status(404).json(error);
+         res.status(212).json(error);
+
     });
 
     //Catch all error handling
@@ -42,7 +43,9 @@ async function start() {
           "statusCode" : "500",
           "text" : error.message
         };
-        res.status(500).json(errorSend);
+
+        res.status(212).json(errorSend);
+
     });
 
     app.server.listen(process.env.PORT || config.port);
