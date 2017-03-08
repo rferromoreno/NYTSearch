@@ -10,7 +10,7 @@ export default
     render() {
         let noticia = this.props.noticia;
         
-        //Noticia disponible => URL con link
+        //Noticia disponible => URL con link : sino URL 
         let itemUrl = (noticia.isAvailable)? (
                         <td> 
                             <a href={ noticia.url }>{ noticia.url }</a> 
