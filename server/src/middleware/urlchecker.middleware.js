@@ -43,7 +43,7 @@ export default
 }
 
 function handleError(error) {
-    //console.log(`${module.id} - ${error}`);
+    // debuggear esto <<<
     logger.log('error',`${module.id} - ${error}`);
     next(error);
 }

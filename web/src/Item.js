@@ -11,16 +11,18 @@ export default
         let noticia = this.props.noticia;
         
         //Noticia disponible => URL con link : sino URL 
-        let itemUrl = (noticia.isAvailable)? (
+        let itemUrl = (noticia.isAvailable) 
+                    ? (
                         <td> 
                             <a href={ noticia.url }>{ noticia.url }</a> 
                             <spam className="disponible"> Disponible </spam> 
-                        </td> ) : (
+                        </td> 
+                    ) : (
                         <td>
                             { noticia.url } 
                             <spam className="noDisponible"> No disponible </spam> 
                         </td>
-                      );
+                    );
 
         return (
             <tr>
