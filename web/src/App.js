@@ -3,6 +3,7 @@ import dateFormat from 'dateformat';
 import logo from "./logo.svg";
 import Botonera from './Botonera';
 import Displayer from './Displayer';
+import Mensajeria from './Mensajeria';
 import "./App.css";
 
 export default 
@@ -64,16 +65,19 @@ export default
     }
 
     render() {
-        let elementToShow=(
-                <Displayer listadoNoticias={ this.state.listadoNoticias } alreadySearched={this.state.alreadySearched} />      
-        );
+
+       let mensaje="";
 
         if (this.state.errorPresent) {
-            elementToShow=(       
-                <div className="errorPresent">
-                    {this.state.errorMessage}
-                </div>
-            );
+            mensaje=this.state.errorMessage;         
+        }
+        if (this.state.alreadySearched){
+            mensaje="La búsqueda ha arrojado los siguientes resultados:";
+        } else{
+                mensaje="Escriba una consulta y seleccione las fechas para realizar la búsqueda.";
+        }
+        if(this.state.alreadySearched & this.state.listadoNoticias.length===0){
+            mensaje="No se han encontrado reusltados.";
         }
 
         return (
@@ -83,7 +87,8 @@ export default
                     <h2>New York Times searcher</h2>
                 </div>
                 <Botonera onSubmit={ this.handleSubmit }/>
-                     {elementToShow}
+                <Mensajeria mensaje={mensaje} />
+                <Displayer listadoNoticias={ this.state.listadoNoticias } alreadySearched={this.state.alreadySearched} />
              </div>
              );
     }

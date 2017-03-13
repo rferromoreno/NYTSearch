@@ -24,14 +24,7 @@ export default
             aux++; 
         });   
 
-        if (rows.length === 0) {
-            return ( 
-                <div className="sinResultados">
-                    No se han encontrado resultados... 
-                </div>
-            );
-        }
-        else {
+      
             return (  
                 <table>
                     <thead>
@@ -46,6 +39,6 @@ export default
                     </tbody>
                 </table>
             );
-        }
+        
     }
 }
