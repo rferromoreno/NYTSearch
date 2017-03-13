@@ -19,16 +19,17 @@ export default
 
     async handleSubmit(event) {
         event.preventDefault();
-        let termino = event.target.qname.value;
-        let fini = dateFormat(event.target.finicio.value, 'yyyymmdd');
-        let ffin = dateFormat(event.target.ffinal.value, 'yyyymmdd');
+        let termino = encodeURIComponent(event.target.qname.value);
+        let fini = encodeURIComponent(dateFormat(event.target.finicio.value, 'yyyymmdd'));
+        let ffin = encodeURIComponent(dateFormat(event.target.ffinal.value, 'yyyymmdd'));
     
         // solicitamos la informacion a la apiº (nuestro)      
         let urlGet = `api/search/${termino}/${fini}/${ffin}`;
        
         fetch(urlGet)
-        .then((promise)=>{
-            return promise.json();
+        .then((response)=>{
+            // El fetch devuelve una promesa, hay que parsear a resultado
+            return response.json();
         })
         .then((response)=>{
             let listadoNoticias=response;
