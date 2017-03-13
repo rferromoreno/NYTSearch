@@ -15,7 +15,7 @@ export default
         next();
     })
     .catch((error) => {
-        logger.log('error',`${module.id} - ${error}`);
+        logger.error(`${module.id} - ${error}`);
         next(error);
     });
 }

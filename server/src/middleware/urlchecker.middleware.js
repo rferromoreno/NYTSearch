@@ -23,7 +23,7 @@ export default
     //Resulevo todas las promesas a la vez
     Promise.all(promiseArray)
         .then((arrayResponse) => {         
-            logger.log('info',`${module.id} - Promise.all`);
+            logger.info(`${module.id} - Promise.all`);
            
            //Generar un json acorde a lo que consume react
             let newsFormatedArray= [];
@@ -36,7 +36,7 @@ export default
                 aux['snippet'] = noticia.snippet;
                 aux['title'] = noticia.headline.main;
                 aux['isAvailable'] = noticia.isAvailable;
-                
+
                 newsFormatedArray.push(aux);    
             });
 
@@ -47,6 +47,6 @@ export default
 
 function handleError(error) {
     // debuggear esto <<<
-    logger.log('error',`${module.id} - ${error}`);
+    logger.error(`${module.id} - ${error}`);
     next(error);
 }

@@ -50,6 +50,7 @@ async function start() {
 
     app.server.listen(process.env.PORT || config.port);
     console.log(`Started on port ${app.server.address().port}`);
+    logger.info(`Started on port ${app.server.address().port}`);
 }
 
 start();

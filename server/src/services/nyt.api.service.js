@@ -42,11 +42,11 @@ function setOptions(beginDate, endDate, query) {
 //Resolving promise to strip innecesary meta-data
 function stripData(response) {
     //console.log(`${module.id} - method stripData - response status: ${response.status}`);
-    logger.log('info',`${module.id} - method stripData - response status: ${response.status}`);
+    logger.info(`${module.id} - method stripData - response status: ${response.status}`);
     return response.response.docs;
 }
 
 function handleError(error) {
-    logger.log('error',`${module.id} - error: ${error}`);
+    logger.error(`${module.id} - error: ${error}`);
     return error; 
 }

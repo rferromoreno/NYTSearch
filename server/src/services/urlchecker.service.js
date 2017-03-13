@@ -27,12 +27,12 @@ export default
 function process(response) {
     let isAlive = checkIfStatusOk(response.statusCode)
 
-    logger.log('info', `${module.id} - method process - returns: ${isAlive}`);
+    logger.info(`${module.id} - method process - returns: ${isAlive}`);
     return isAlive;
 }
 
 function handleError(error) {
-    logger.log('error', `${module.id} - ${error.message}`);
+    logger.error(`${module.id} - ${error.message}`);
     return error;
 }
 

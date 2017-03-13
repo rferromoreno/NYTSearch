@@ -1,19 +1,25 @@
 import winston from 'winston';
+require('winston-daily-rotate-file');
 
   // logger
 var logger = new (winston.Logger)({
   transports: [
-    new (winston.transports.File)({
-      name: 'info-file',
-      filename: 'filelog-info.log',
-      level: 'info'
+    new (winston.transports.DailyRotateFile)({
+    name: 'info-file',
+    filename: './info-log',
+    datePattern: 'yyyy-MM-dd.',
+    prepend: true,
+    level: 'info'
     }),
-    new (winston.transports.File)({
-      name: 'error-file',
-      filename: 'filelog-error.log',
-      level: 'error'
-    })
+    new (winston.transports.DailyRotateFile)({
+    name: 'erorr-file',
+    filename: './error-log',
+    datePattern: 'yyyy-MM-dd.',
+    prepend: true,
+    level: 'error'
+  })
   ]
 });
 
 module.exports = logger;
+
