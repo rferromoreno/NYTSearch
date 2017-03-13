@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import dateFormat from 'dateformat';
 import logo from "./logo.svg";
 import Botonera from './Botonera';
 import Displayer from './Displayer';
 import "./App.css";
-import dateFormat from 'dateformat';
 
 export default 
   class App extends Component {
@@ -28,33 +28,27 @@ export default
        
         fetch(urlGet)
         .then((promise)=>{
-            
             return promise.json();
-           
         })
         .then((response)=>{
-        let listadoNoticias=response;
+            let listadoNoticias=response;
             //check what do we received
-            if(listadoNoticias.statusCode){ //there was an error on the server
-                 console.log('Hubo error: ', listadoNoticias.statusCode);
-                 this.setState({
+            if (listadoNoticias.statusCode) { //there was an error on the server
+                console.log('Hubo error: ', listadoNoticias.statusCode);
+                this.setState({
                 errorPresent: true,
                 errorMessage: listadoNoticias.text
 
              });
-
             }
-            else{
-
-            
-            console.log('noticias', listadoNoticias);
+            else{     
+                console.log('noticias', listadoNoticias);
                 this.setState({
                 listadoNoticias: listadoNoticias,
                 alreadySearched: true,
-                 errorPresent: false
+                errorPresent: false
 
             });
-
             }
         })
             .catch((error)=>{
@@ -62,7 +56,6 @@ export default
                 this.setState({
                 errorPresent: true,
                 errorMessage: 'Error en la comunicación con el servidor, intentelo nuevamente'
-
              });
             });
 
@@ -70,24 +63,19 @@ export default
     }
 
     render() {
-
         let elementToShow=(
-            
-                <Displayer listadoNoticias={ this.state.listadoNoticias } alreadySearched={this.state.alreadySearched} />
-           
+                <Displayer listadoNoticias={ this.state.listadoNoticias } alreadySearched={this.state.alreadySearched} />      
         );
 
-        if (this.state.errorPresent){
-            elementToShow=(
-                
+        if (this.state.errorPresent) {
+            elementToShow=(       
                 <div className="errorPresent">
                     {this.state.errorMessage}
                 </div>
-                 );
+            );
         }
 
         return (
-
             <div className="App">
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />         
@@ -95,7 +83,6 @@ export default
                 </div>
                 <Botonera onSubmit={ this.handleSubmit }/>
                      {elementToShow}
-
              </div>
              );
     }

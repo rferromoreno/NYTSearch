@@ -8,6 +8,18 @@ import logger from "../logger";
 *   Returns a promise of an array of news.
 */
 
+//Options template for request
+const optionTmp = {
+    method: 'GET',
+    uri: config.apiurl,
+    qs: {
+        'api-key': config.apikey,
+        'sort': "newest",
+        'fl': "web_url,snippet,headline,pub_date"
+    },
+    json: true
+};
+
 export default
   function getNews(beginDate, endDate, query) {
     let options = setOptions(beginDate, endDate, query);
@@ -38,15 +50,3 @@ function handleError(error) {
     logger.log('error',`${module.id} - error: ${error}`);
     return error; 
 }
-
-//Options template for request
-const optionTmp = {
-    method: 'GET',
-    uri: config.apiurl,
-    qs: {
-        'api-key': config.apikey,
-        'sort': "newest",
-        'fl': "web_url,snippet,headline,pub_date"
-    },
-    json: true
-};

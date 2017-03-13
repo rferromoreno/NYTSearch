@@ -9,18 +9,17 @@ export default
   class Item extends Component {
     render() {
         let noticia = this.props.noticia;
-        
         //Noticia disponible => URL con link : sino URL 
         let itemUrl = (noticia.isAvailable) 
                     ? (
                         <td> 
                             <a href={ noticia.url }>{ noticia.url }</a> 
-                            <spam className="disponible"> Disponible </spam> 
+                            <span className="disponible"> Disponible </span> 
                         </td> 
                     ) : (
                         <td>
                             { noticia.url } 
-                            <spam className="noDisponible"> No disponible </spam> 
+                            <span className="noDisponible"> No disponible </span> 
                         </td>
                     );
 

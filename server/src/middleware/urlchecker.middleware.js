@@ -29,11 +29,14 @@ export default
             let newsFormatedArray= [];
 
             data.forEach((noticia) => {
+
                 let aux = {};
+
                 aux['url'] = noticia.web_url;
                 aux['snippet'] = noticia.snippet;
                 aux['title'] = noticia.headline.main;
                 aux['isAvailable'] = noticia.isAvailable;
+                
                 newsFormatedArray.push(aux);    
             });
 

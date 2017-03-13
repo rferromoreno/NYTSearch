@@ -25,8 +25,7 @@ export default
 }
 
 function process(response) {
-    let isAlive = response.statusCode >= 200 &&
-                    response.statusCode <= 299;
+    let isAlive = checkIfStatusOk(response.statusCode)
 
     logger.log('info', `${module.id} - method process - returns: ${isAlive}`);
     return isAlive;
@@ -35,5 +34,9 @@ function process(response) {
 function handleError(error) {
     logger.log('error', `${module.id} - ${error.message}`);
     return error;
+}
+
+function checkIfStatusOk(status) {
+    return status >= 200 && status <= 299;
 }
 
