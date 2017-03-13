@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import newsMiddleWare from '../middleware/news.middleware';
 import checkUrlMiddleware from '../middleware/urlchecker.middleware';
 
