@@ -12,7 +12,7 @@ var logger = new (winston.Logger)({
     level: 'info'
     }),
     new (winston.transports.DailyRotateFile)({
-    name: 'erorr-file',
+    name: 'error-file',
     filename: './error-log',
     datePattern: 'yyyy-MM-dd.',
     prepend: true,
